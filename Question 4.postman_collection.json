@@ -1,0 +1,164 @@
+{
+  "info": {
+    "_postman_id": "80a4ec09-f828-462b-9e67-cc5e165b9f27",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53012518",
+    "_collection_link": "https://go.postman.co/collection/53012518-80a4ec09-f828-462b-9e67-cc5e165b9f27?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"EPOCH is within the last 30 days\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    var now = new Date();",
+              "    var thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);",
+              "",
+              "    jsonData.forEach(function (item) {",
+              "        var epochDate = new Date(item.EPOCH);",
+              "        pm.expect(epochDate.getTime(), \"EPOCH \" + item.EPOCH + \" for \" + item.OBJECT_NAME + \" should be within the last 30 days\").to.be.at.least(thirtyDaysAgo.getTime());",
+              "        pm.expect(epochDate.getTime(), \"EPOCH \" + item.EPOCH + \" for \" + item.OBJECT_NAME + \" should not be in the future\").to.be.at.most(now.getTime());",
+              "    });",
+              "});",
+              "",
+              "pm.test(\"OBJECT_ID follows YYYY-NNNP{PP} format\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    var objectIdPattern = /^\\d{4}-\\d{3}[A-Z]+$/;",
+              "",
+              "    jsonData.forEach(function (item) {",
+              "        pm.expect(",
+              "            objectIdPattern.test(item.OBJECT_ID),",
+              "            \"OBJECT_ID '\" + item.OBJECT_ID + \"' for \" + item.OBJECT_NAME + \" does not match expected format YYYY-NNNP{PP}\"",
+              "        ).to.be.true;",
+              "    });",
+              "});",
+              "",
+              "pm.test(\"OBJECT_ID year matches EPOCH year\", function () {",
+              "    var jsonData = pm.response.json();",
+              "",
+              "    jsonData.forEach(function (item) {",
+              "        var objectIdYear = parseInt(item.OBJECT_ID.split(\"-\")[0], 10);",
+              "        var epochYear = new Date(item.EPOCH).getFullYear();",
+              "        pm.expect(",
+              "            objectIdYear,",
+              "            \"OBJECT_ID year '\" + objectIdYear + \"' for \" + item.OBJECT_NAME + \" does not match EPOCH year '\" + epochYear + \"'\"",
+              "        ).to.equal(epochYear);",
+              "    });",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-mock-response-name",
+            "value": "BAD EPOCH",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=json",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "NORAD",
+            "elements",
+            "gp.php"
+          ],
+          "query": [
+            {
+              "key": "GROUP",
+              "value": "last-30-days"
+            },
+            {
+              "key": "FORMAT",
+              "value": "json"
+            }
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": [
+        {
+          "name": "BAD Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=json",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "NORAD",
+                "elements",
+                "gp.php"
+              ],
+              "query": [
+                {
+                  "key": "GROUP",
+                  "value": "last-30-days"
+                },
+                {
+                  "key": "FORMAT",
+                  "value": "json"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": ":status",
+              "value": 200
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=UTF-8"
+            },
+            {
+              "key": "server",
+              "value": "Microsoft-IIS/10.0"
+            },
+            {
+              "key": "x-powered-by",
+              "value": "PHP/8.2.20"
+            },
+            {
+              "key": "content-disposition",
+              "value": "filename=\"last-30-days.json\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 08 Mar 2026 13:22:47 GMT"
+            },
+            {
+              "key": "content-length",
+              "value": "158139"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"OBJECT_NAME\": \"PRC TEST SPACECRAFT 4\",\n        \"OBJECT_ID\": \"2026-045A\",\n        \"EPOCH\": \"2026-03-08T05:17:31.416864\",\n        \"MEAN_MOTION\": 14.91687004,\n        \"ECCENTRICITY\": 0.0006081,\n        \"INCLINATION\": 49.9864,\n        \"RA_OF_ASC_NODE\": 29.6681,\n        \"ARG_OF_PERICENTER\": 354.6389,\n        \"MEAN_ANOMALY\": 5.4487,\n        \"EPHEMERIS_TYPE\": 0,\n        \"CLASSIFICATION_TYPE\": \"U\",\n        \"NORAD_CAT_ID\": 67689,\n        \"ELEMENT_SET_NO\": 999,\n        \"REV_AT_EPOCH\": 436,\n        \"BSTAR\": 4.9114e-5,\n        \"MEAN_MOTION_DOT\": 2.55e-6,\n        \"MEAN_MOTION_DDOT\": 0\n    }   \n]"
+        }
+      ]
+    }
+  ]
+}

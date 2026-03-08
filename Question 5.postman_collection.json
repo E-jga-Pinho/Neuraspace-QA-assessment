@@ -1,0 +1,641 @@
+{
+  "info": {
+    "_postman_id": "ccbf732e-0e07-4123-a188-a922b72d3782",
+    "name": "Question 5",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53012518"
+  },
+  "item": [
+    {
+      "name": "Q5-01-200",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Q5-01-200: Valid payload returns 200 Created', function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101B\",\r\n  \"noradId\": \"50002\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 12,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-02-invalid launchDate",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-02-invalid launchDate: Launch date is invalid, Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101B\",\r\n  \"noradId\": \"50003\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026/03/08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 12,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-02-invalid Decay",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-02-invalid Decay: Decay date is invalid, Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101D\",\r\n  \"noradId\": \"50004\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"08/03/2031T15:28:51.018Z\",\r\n  \"period\": 12,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-03-CosparId-Invalid year",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-03-CosparId-Invalid year: Cospar id is invalid, Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"ASDF-101E\",\r\n  \"noradId\": \"50005\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 12,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-03-CosparId-Invalid 3-digit code",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-03-CosparId-Invalid 3-digit code: Cospar id is invalid, Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-D01F\",\r\n  \"noradId\": \"50006\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 12,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-04-NoradId-4-digits only",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-04-NoradId-4-digits only: NORAD id is invalid, should be a 5-digit code\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101G\",\r\n  \"noradId\": \"5005\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 12,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-04-NoradId-6-digits",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-04-NoradId-6-digits: NORAD id is invalid, should be a 5-digit code\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101H\",\r\n  \"noradId\": \"500555\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 12,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-04-NoradId-Char added",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-04-NoradId-Char added: NORAD id is invalid, should be a 5-digit code\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101I\",\r\n  \"noradId\": \"ABC123\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 12,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-05-Period < 0",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-05-Period < 0: period must be a positive number larger then 0\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101J\",\r\n  \"noradId\": \"50007\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": -1,\r\n  \"inclination\": 13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-05-Inclination < 0",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-05-Inclination < 0: inclination must be apositive number larger then 0 \", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101K\",\r\n  \"noradId\": \"50008\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 20,\r\n  \"inclination\": -13,\r\n  \"apogee\": 14,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-05-Apogee < 0",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-05-Apogee < 0: apogee must be apositive number larger then 0\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101L\",\r\n  \"noradId\": \"50009\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 20,\r\n  \"inclination\": 12,\r\n  \"apogee\": -23,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-05-Perigee < 0",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-05-Perigee < 0: perigee must be apositive number larger then 0\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101M\",\r\n  \"noradId\": \"50010\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 20,\r\n  \"inclination\": 12,\r\n  \"apogee\": 23,\r\n  \"perigee\": -15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 18\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-06-Dry mass < 0",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-06-Dry mass < 0: dryMass must be apositive number larger then 0\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101N\",\r\n  \"noradId\": \"50011\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 20,\r\n  \"inclination\": 12,\r\n  \"apogee\": 23,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": -234\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-06-Lauch mass < 0",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-06-Lauch mass < 0: lauchMass must be apositive number larger then 0\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101N\",\r\n  \"noradId\": \"50011\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Payload\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 20,\r\n  \"inclination\": 12,\r\n  \"apogee\": 23,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": -234\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Q5-07-Invalid Object type",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Q5-07-Invalid Object type: Object Type must be either RocketBody, Payload or Debris\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"cosparId\": \"2026-101O\",\r\n  \"noradId\": \"50012\",\r\n  \"name\": \"Q5TestSat\",\r\n  \"objectType\": \"Engine\",\r\n  \"launchCountry\": \"Portugal\",\r\n  \"launchDate\": \"2026-03-08T15:28:51.018Z\",\r\n  \"launchSite\": \"Açores\",\r\n  \"decay\": \"2031-03-08T15:28:51.018Z\",\r\n  \"period\": 20,\r\n  \"inclination\": 12,\r\n  \"apogee\": 23,\r\n  \"perigee\": 15,\r\n  \"launchMass\": 21,\r\n  \"dryMass\": 234\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/space_objects",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "space_objects"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
